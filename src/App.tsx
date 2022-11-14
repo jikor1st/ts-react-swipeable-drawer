@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { PropsWithChildren } from "react";
+import ResetStyle from "./styles/resetStyle";
+import styled from "styled-components";
+
+function Layout({ children }: PropsWithChildren) {
+  return <LayoutContainer>{children}</LayoutContainer>;
+}
+
+const LayoutContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  background-color: #ffffff;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContainer>
+      <Layout>
+        <ResetStyle />
+      </Layout>
+    </AppContainer>
   );
 }
+
+const AppContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  background-color: #cccccc;
+`;
 
 export default App;
