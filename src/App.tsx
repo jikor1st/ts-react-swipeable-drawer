@@ -1,12 +1,11 @@
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, Suspense, lazy } from "react";
 import ResetStyle from "./styles/resetStyle";
 import styled from "styled-components";
+import { Routes, Route } from "react-router-dom";
 
-function Layout({ children }: PropsWithChildren) {
-  return <LayoutContainer>{children}</LayoutContainer>;
-}
+const MainPage = lazy(() => import("./pages/Main"));
 
-const LayoutContainer = styled.div`
+const Layout = styled.div`
   width: 100%;
   height: 100%;
   max-width: 450px;
@@ -16,15 +15,20 @@ const LayoutContainer = styled.div`
 
 function App() {
   return (
-    <AppContainer>
-      <Layout>
-        <ResetStyle />
-      </Layout>
-    </AppContainer>
+    <Suspense>
+      <ResetStyle />
+      <AppWrapper>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+          </Routes>
+        </Layout>
+      </AppWrapper>
+    </Suspense>
   );
 }
 
-const AppContainer = styled.div`
+const AppWrapper = styled.div`
   width: 100%;
   height: 100vh;
   background-color: #cccccc;
